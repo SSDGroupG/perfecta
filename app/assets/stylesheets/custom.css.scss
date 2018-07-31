@@ -6,30 +6,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-
-
 .jumbotron {
   background-image: url('jumbotron.jpg');
   h1, h2 {
     font-family: guardian-egyptt, georgia, serif;
   }
 
-
-
-  
-  
 }
 #heads{
-	background: url("http://dash.ga.co/assets/jeff-bg.png");
 	background-size:cover;
 	background-position: center;
 	float: none;
 	font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, source-code-pro, monospace;
-    margin: 0 auto;
+  margin: 0 auto;
 	display: block;
 	padding:200px 0px 0px 0px;
+	
 	p{
 		color:white;
 		font-size:76px;
@@ -98,9 +90,6 @@ body {
 }
 
 
-
-
-
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #E8491D;
   background-color: transparent;
@@ -116,37 +105,3 @@ body {
 
 .navbar-nav .a:hover{
   color:#ffffff;
-  font-weight:bold;
-}
-
-
-
-.center {
-  text-align: center;
-}
-
-.col-md-3:nth-child(4n+1) {
-  clear: left;
-}
-
-.caption{
-	h3{
-		font-size:17px;
-		margin:2px;
-	}
-	
-p{
-	font-family: "Open sans", sans-serif;
-	color:#999999;
-	line-height: 20px;
-}
-
-
-}
-
-.col-md-6{
-	h3 {font-size:35px;}
-	h5 {font-size:20px}
-	p {font-size:14px;}
-
-}
