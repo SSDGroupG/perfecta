@@ -1,3 +1,4 @@
+<div class="container">
 <div class="jumbotron">
   <h1>Handcrafted items from <br>
       around the world.</h1>
@@ -6,7 +7,9 @@
 <div class="center">
   <div class="row">
     <% @listings.each do |listing| %>
-      <div class="col-md-3">
+      <div class="col-md-3 wow fadeInUp">
+        <div class="services_offer">
+							<div class="ts-service-image-wrapper">
         <div class="thumbnail">
           <%= link_to image_tag(listing.image.url), listing %>
           <div class="caption">
@@ -15,6 +18,8 @@
             <p><%= "Sold by #{listing.user.name}" %></p>
           </div>
         </div>
+      </div>
+       </div>
       </div>
     <% end %>
   </div>
@@ -27,3 +32,4 @@
 
 <% end %>
 <br>
+</div>

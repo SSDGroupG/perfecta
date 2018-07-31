@@ -34,25 +34,31 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
     
-    if current_user.recipient.blank?
-      Stripe.api_key = ENV["STRIPE_API_KEY"]
-      token = params[:stripeToken]
+   # if current_user.recipient.blank?
+   #  Stripe.api_key = ENV["STRIPE_API_KEY"]
+   #  token = params[:stripeToken]
 
-      recipient = Stripe::Account.create( 
-:name => current_user.name,
-        
-        :bank_account => token,
-:type => 'custom', 
-:country => 'IE', 
-:email => current_user.email 
-
-) 
-
-
-
-      current_user.recipient = recipient.id
-      current_user.save
+    # recipient = Stripe::Account.create( 
+    # :bank_account => token,
+    #  :type => 'custom', 
+    # :country => 'IE', 
+    # :email => current_user.email 
+    #  ) 
+    
+    respond_to do |format|
+      if @listing.save
+        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
+        format.json { render :show, status: :created, location: @listing }
+      else
+        format.html { render :new }
+        format.json { render json: @listing.errors, status: :unprocessable_entity }
+      end
     end
+  end
+    
+      #current_user.recipient = recipient.id
+      #current_user.save
+       #end
      
     respond_to do |format|
       if @listing.save
@@ -105,4 +111,4 @@ class ListingsController < ApplicationController
         redirect_to root_url, alert: "Sorry, this listing belongs to someone else"
       end
     end
-end
+

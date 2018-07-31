@@ -1,5 +1,6 @@
+<div class="container">
 <div class="center">
-  <h2>Your Purchase History</h2>
+  <h2>YOUR PURCHASE HISTORY</h2>
 </div>
 
 <table class="table table-striped table-bordered">
@@ -21,9 +22,10 @@
     </tr>
   <% end %>
 </table>
-
-<br>
+</div>
+<br><br>
 
 <% if user_signed_in? %>
-  <%= link_to 'New Listing', new_listing_path, class: "btn btn-link", data: { no_turbolink: true } %>
+  <%= link_to 'New Listing', new_listing_path, class: "btn btn-warning", data: { no_turbolink: true } %>
+  <br><br>
 <% end %>

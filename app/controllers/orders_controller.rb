@@ -29,38 +29,29 @@ class OrdersController < ApplicationController
 
     Stripe.api_key = ENV["STRIPE_API_KEY"]
     token = params[:stripeToken]
+    begin
+      customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+      )
 
-  begin
       charge = Stripe::Charge.create(
-       :amount => (@listing.price * 95).floor,
-        :currency => 'eur',
-        :source => 'tok_visa',  #params[:stripeToken] might be for in production I think this is for testing.,
-    :description => '@seller.id',
-    :statement_descriptor => '@seller.id'
+        :customer    => customer.id,
+        :amount => (@listing.price * 100).floor,
+        :currency => "usd",
+        :card => token
         )
-        
-   
-    
-        
-        
-        
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
 
-    transfer = Stripe::Transfer.create(
-      :amount => (@listing.price * 95).floor,
-      :currency => "eur",
-      :destination => @seller.recipient
-      )
-
-    respond_to do |format|
+ respond_to do |format|
       if @order.save
-        format.html { redirect_to root_url }
-        format.json { render action: 'show', status: :created, location: @order }
+        format.html { redirect_to root_path, notice: 'Order was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
       else
-        format.html { render action: 'new' }
+        format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
