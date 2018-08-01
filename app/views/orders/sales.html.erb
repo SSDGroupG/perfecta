@@ -22,10 +22,11 @@
     </tr>
   <% end %>
 </table>
-</div>
+
 <br><br>
 
 <% if user_signed_in? %>
   <%= link_to 'New Listing', new_listing_path, class: "btn btn-warning",data: { no_turbolink: true } %>
 <br><br>
 <% end %>
+</div>
