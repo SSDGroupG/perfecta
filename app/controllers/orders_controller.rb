@@ -31,11 +31,12 @@ def create
     token = params[:stripeToken]
 
    begin
-      charge = Stripe::Charge.create(
+      charge = Stripe::Charge.create({
         :amount => (@listing.price * 100).floor,
         :currency => "usd",
-        :card => token
-        )
+        :source => "tok_visa",
+        :transfer_group => "{ORDER10}",
+      })
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
@@ -45,7 +46,14 @@ def create
        # :currency => "usd",
         #:recipient => @seller.recipient
      # )
-    
+  
+# Create a Transfer to a connected account (later):
+#transfer = Stripe::Transfer.create({
+  #:amount => 7000,
+  #:currency => "eur",
+ # :destination => "{STRIPE_API_KEY}",
+  #:transfer_group => "{ORDER10}",
+#})
 
 respond_to do |format|
       if @order.save
