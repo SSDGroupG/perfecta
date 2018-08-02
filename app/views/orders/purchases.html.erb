@@ -10,8 +10,10 @@
     <th class="center">Price</th>
     <th class="center">Seller</th>
     <th class="center">Date Purchased</th>
+    <th class="center">Address</th>
   </tr>
 
+  <% unless @orders.blank? %> 
   <% @orders.each do |order| %>
     <tr>
       <td class="center"><%= image_tag order.listing.image.url(:thumb) %></td>
@@ -19,7 +21,9 @@
       <td class="center"><%= number_to_currency(order.listing.price,:unit=>'€') %></td>
       <td class="center"><%= order.seller.name %></td>
       <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
+      <td class="center"><%= order.address %></td>
     </tr>
+  <% end %>
   <% end %>
 </table>
 
@@ -28,5 +32,6 @@
 <% if user_signed_in? %>
   <%= link_to 'New Listing', new_listing_path, class: "btn btn-warning", data: { no_turbolink: true } %>
   <br><br>
+
 <% end %>
 </div>
