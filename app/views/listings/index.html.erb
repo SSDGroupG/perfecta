@@ -14,6 +14,11 @@
             <h3><%= listing.name %></h3>
            <p><%= number_to_currency(listing.price,:unit=>'€') %></p>
             <p><%= "Sold by #{listing.user.name}" %></p>
+            <% if user_signed_in? %>
+            <% if (listing.user == current_user) || (current_user.admin?) %>
+            <%= link_to 'Destroy', listing, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %>
+            <% end %>
+            <% end %>
           </div>
         </div>
       </div>

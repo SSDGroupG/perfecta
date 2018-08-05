@@ -46,7 +46,7 @@ gem "jquery-turbolinks"
 gem 'rmagick'
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-
+gem 'searchkick'
 
 
 group :development, :test do
